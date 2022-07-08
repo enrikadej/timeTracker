@@ -18,13 +18,21 @@ export interface DeleteTimeAction {
 }
 
 
-export const addTime = (payload: Time): Action => ({
+export const addTimeActions = (payload: Time): Action => ({
   type: ActionType.ADD_TIME,
   payload,
 });
 
-export const deleteTime = (payload: Time): Action => ({
+export const deleteTimeActions = (payload: Time): Action => ({
   type: ActionType.DELETE_TIME,
   payload,
 });
 
+
+// export function updateTimer({timerState, id}) {
+//   return {type: UPDATE_TIMER, timerState, id}
+// }
+
+// export function stopTimer({timerState, id}) {
+//   return {type: STOP_TIMER, timerState, id}
+// }

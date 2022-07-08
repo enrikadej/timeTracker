@@ -1,6 +1,8 @@
 import React = require('react');
 import './TimeInput.css';
 import { Formik, Form, Field } from 'formik';
+import { useDispatch } from 'react-redux';
+import { addTimeActions } from '../../store/actions';
 
 interface MyFormValues {
   title: string,
@@ -8,6 +10,7 @@ interface MyFormValues {
 
 export const TimeInput = () => {
   let count = 1;
+  const dispatch = useDispatch();
 
   const initialValues: MyFormValues = {
     title: '',
@@ -18,8 +21,12 @@ export const TimeInput = () => {
 
     const packTime = {
       id: count,
-      title: value.title,
+      title: value.title === '' 
+        ? `No name tracker #${count}` 
+        : value.title,
     }
+
+    dispatch(addTimeActions(packTime));
   }
 
   return (

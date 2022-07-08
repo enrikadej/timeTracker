@@ -10,13 +10,14 @@ const reducer = (state: State = initialState, action: Action) => {
   switch (action.type) {
     case ActionType.ADD_TIME:
       return {
-        times: [...state.times, action.payload],
+        times: [action.payload, ...state.times],
       };
 
     case ActionType.DELETE_TIME:
       return {
-        // times: [...state.times].filter(),
-        // filter by id to delete need timeItem
+        times: [...state.times].filter(time => (
+          time.id !== action.payload.id)
+        )
       };
 
     default:
