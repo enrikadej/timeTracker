@@ -9,11 +9,11 @@ export const TimeTable = () => {
   console.log(times);
 
   return (
-    <table>
+    <table className="table">
       <tbody>
         {times.map(time => (
           <tr key={time.id}>
-            <td>{time.title}</td>
+            <td>{time.title} </td>
             <td><Timer time={time} /></td>
           </tr>
         ))}

@@ -3,10 +3,7 @@ import { useDispatch } from "react-redux";
 import { useStopwatch } from 'react-timer-hook';
 import { deleteTimeActions } from '../../store/actions';
 import { Time } from '../../react-app-env';
-
-type Props = {
-  time: Time,
-}
+import './Timer.css';
 
 const formatTime = (
   hh: number, 
@@ -20,13 +17,20 @@ const formatTime = (
   return `${hourTime}:${minuteTime}:${secondTime}`
 }
 
+type Props = {
+  time: Time,
+}
+
 export const Timer:React.FC<Props> = React.memo(({ time }) => {
   const dispatch = useDispatch();
 
   const deletingTime = (timeValue: Time) => {
     dispatch(deleteTimeActions(timeValue));
   }
+
   const dateWatch = new Date();
+
+  console.log('timer');
 
   const {
     seconds,
@@ -40,34 +44,53 @@ export const Timer:React.FC<Props> = React.memo(({ time }) => {
     offsetTimestamp: dateWatch 
   });
 
+  let showTime = formatTime(hours, minutes, seconds);
+  
+  localStorage.setItem(`${time.id}`, showTime);
+  console.log(localStorage.getItem(`${time.id}`));
+  const localTime = localStorage.getItem(`${time.id}`);
+  
+
+  if (localTime !== '') {
+    const localHours = localTime.substring(0, 2);
+    const localMinutes = localTime.substring(3, 5);
+    const localSeconds = localTime.substring(6, 8);
+
+    showTime = formatTime(+localHours, +localMinutes, +localSeconds);
+  }
+  
+
+
   return (
-    <div>
-      <span>
-        {formatTime(hours, minutes, seconds)}
+    <div className="timer">
+      <span className="timer__time">
+        {showTime}
       </span>
-      {isRunning ? (
-        <button onClick={pause}>Pause</button>
-      ) : (
-        <button onClick={start}>Start</button>
-      )}
-      <button
-        type="button"
-        onClick={() => {
-          deletingTime(time);
-        }}
-      >
-          Delete
-      </button>
+      <span className="timer__buttons">
+        {isRunning ? (
+          <img 
+            onClick={pause}
+            className="timer__button"
+            src="../../images/pause_circle_black_24dp.svg" 
+            alt="Pause" 
+          />
+        ) : (
+          <img 
+            onClick={start}
+            className="timer__button"
+            src="../../images/play_circle_black_24dp.svg" 
+            alt="Play" 
+          />
+        )}
+        <img 
+          onClick={() => {
+            deletingTime(time);
+          }}
+          className="timer__button"
+          src="../../images/remove_circle_black_24dp.svg" 
+          alt="Delete" 
+        />
+      </span>
     </div>
   );
 })
-
-// const COUNTER_KEY = 'my-counter';
-
-// if ((i--) > 0) {
-//   window.sessionStorage.setItem(COUNTER_KEY, i);
-// } else {
-//   window.sessionStorage.removeItem(COUNTER_KEY);
-//   clearInterval(timer);
-//   callback();
-// }

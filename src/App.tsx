@@ -6,8 +6,8 @@ import { TimeTable } from './components/TimeTable';
 export const App: React.FC = () => {
    return (
       <div className="app">
-         <h1 className="app__header">
-            TRACKER
+         <h1 className="app__header title">
+            tracker
          </h1>
          <div className="app_timeInput">
             <TimeInput />

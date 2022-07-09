@@ -1,0 +1,18 @@
+.newTime__input {
+  border-radius: 25px;
+  height: 35px;
+  width: 400px;
+}
+
+.newTime__button--transparent {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.newTime__button {
+  transform: translate(-42px, 12px);
+}

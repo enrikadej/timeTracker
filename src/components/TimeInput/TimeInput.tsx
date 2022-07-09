@@ -45,7 +45,7 @@ export const TimeInput = () => {
         className="newTime" 
         translate={undefined}
       >
-          <div className="form-field">
+          <div className="newTime__form-field">
             <label htmlFor="title">
               <Field
                 id="title"
@@ -53,14 +53,15 @@ export const TimeInput = () => {
                 placeholder="Enter tracker time"
                 className="newTime__input"
               />
+            <button
+              type="submit"
+              className="newTime__button--transparent newTime__button"
+            >
+              <img src="../../images/play_circle_black_36dp.svg" alt="add" />
+            </button>
             </label>
           </div>
-          <button
-            type="submit"
-            className="newTime__submit-button button"
-          >
-            ADD
-          </button>
+
         </Form>
     </Formik>
   );
